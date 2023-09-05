@@ -1,7 +1,6 @@
 // Requirements
 const index = require('./index.js');
 const {execSync} = require("child_process");
-const exec = require('child_process').exec;
 const winCMD = require('node-cmd');
 
 // Varaible Declarations
@@ -28,27 +27,9 @@ function checkForServer() {
 		return [serverStatus, serverPlayers];
 	};
 
-// Check if Server is Running at Hardware Level
-const isRunning = (query, cb) => {
-    let platform = process.platform;
-    let cmd = '';
-    switch (platform) {
-        case 'win32' : cmd = `tasklist`; break;
-        case 'darwin' : cmd = `ps -ax | grep ${query}`; break;
-        case 'linux' : cmd = `ps -A`; break;
-        default: break;
-    }
-    exec(cmd, (err, stdout, stderr) => {
-        cb(stdout.toLowerCase().indexOf(query.toLowerCase()) > -1);
-		serverStatus = (stdout.toLowerCase().indexOf(query.toLowerCase()) > -1);
-		console.log('Program: "' + programQuery + '" - Status: ' + serverStatus);
-    });
-}
-
 // Forces the Server to Restart When Crash Detected
 function forceRestartServer(){
-	isRunning();
-	if (serverStatus == false) {
+	if (serverStatus == 'offline') {
 		const killProcess = winCMD.run('Taskkill /IM C:\\Windows\\system32\\cmd.exe /F')
 		console.log(killProcess);
 	}
