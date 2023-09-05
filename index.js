@@ -1,13 +1,15 @@
 // Requirements
 const fs = require('node:fs');
 const path = require('node:path');
-const exec = require('child_process').exec;
 const { Client, Collection, GatewayIntentBits, ActivityType } = require('discord.js');
 const { token } = require('./config.json');
 const statusUpdater = require('./statusUpdater.js');
 
 // Varaible Declarations
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+let d = new Date();
+datetext = d.toTimeString().split(' ')[0]
+
 
 // Establish Collection of Commands
 client.commands = new Collection();
@@ -19,26 +21,22 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
-// Check if Server is Running
-function _isRunning() {
-	serverData = statusUpdater.checkForServer();
-};
-
-// Update Bot Status Based on Server
+// Function Updating Bot Status Based on Server
 function updateBotStatus() {
-		_isRunning();
-		if (serverData[0] == 'online') {
-			client.user.setStatus('online');
-			client.user.setActivity(serverData[1], { type: ActivityType.Watching });
-			console.log('\nBot Status set to: ONLINE');
-		} else {
-			client.user.setStatus('dnd');
-			client.user.setActivity('for Server Response', { type: ActivityType.Watching });
-			console.log('\nBot status set to: OFFLINE');
-		};
+	serverData = statusUpdater.checkForServer();
+	if (serverData[0] == 'online') {
+		client.user.setStatus('online');
+		client.user.setActivity(serverData[1], { type: ActivityType.CUSTOM_STATUS });
+		console.log('\nBot Status set to ONLINE at :' + datetext);
+		console.log(serverData[1] + 'Players Online')
+	} else {
+		client.user.setStatus('dnd');
+		client.user.setActivity('Server Currently Offline', { type: ActivityType.CUSTOM_STATUS });
+		console.log('\nBot status set to OFFLINE at :' + datetext);
+		statusUpdater.forceRestartServer();
+	};
 };
 
-exports.updateBotStatus = updateBotStatus;
 
 // Runs When Bot is Ready
 client.once('ready', () => {
@@ -61,4 +59,5 @@ client.on('interactionCreate', async interaction => {
 });
 
 // Closing Code
+exports.updateBotStatus = updateBotStatus;
 client.login(token);
