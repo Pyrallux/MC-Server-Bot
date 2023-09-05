@@ -8,7 +8,7 @@ const statusUpdater = require('./statusUpdater.js');
 // Varaible Declarations
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 let d = new Date();
-datetext = d.toTimeString().split(' ')[0]
+let datetext = d.toTimeString().split(' ')[0]
 
 
 // Establish Collection of Commands
@@ -23,6 +23,7 @@ for (const file of commandFiles) {
 
 // Function Updating Bot Status Based on Server
 function updateBotStatus() {
+	datetext = d.toTimeString().split(' ')[0]
 	serverData = statusUpdater.checkForServer();
 	if (serverData[0] == 'online') {
 		client.user.setStatus('online');
