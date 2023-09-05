@@ -1,7 +1,8 @@
+// Requirements
 const index = require('./index.js');
 const {execSync} = require("child_process");
 const exec = require('child_process').exec;
-const winCMD = requrie('node-cmd');
+const winCMD = require('node-cmd');
 
 // Varaible Declarations
 let serverStatus = 'none';
@@ -20,7 +21,7 @@ function checkForServer() {
 			serverStatus = 'offline';
 		}
 		if (body.players.now) {
-			serverPlayers = (body.players.now + ' Player\(s\) are Online');
+			serverPlayers = (body.players.now + ' Player\(s\) Online');
 		} else {
 			serverPlayers = ('for Players 👀');
 		}

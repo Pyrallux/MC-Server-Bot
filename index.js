@@ -26,13 +26,13 @@ function updateBotStatus() {
 	serverData = statusUpdater.checkForServer();
 	if (serverData[0] == 'online') {
 		client.user.setStatus('online');
-		client.user.setActivity(serverData[1], { type: ActivityType.CUSTOM_STATUS });
-		console.log('\nBot Status set to ONLINE at :' + datetext);
-		console.log(serverData[1] + 'Players Online')
+		client.user.setActivity(serverData[1], { type: ActivityType.WATCHING });
+		console.log('\nBot Status set to ONLINE at ' + datetext);
+		console.log(serverData[1]);
 	} else {
 		client.user.setStatus('dnd');
-		client.user.setActivity('Server Currently Offline', { type: ActivityType.CUSTOM_STATUS });
-		console.log('\nBot status set to OFFLINE at :' + datetext);
+		client.user.setActivity('an Offline Server', { type: ActivityType.WATCHING });
+		console.log('\nBot status set to OFFLINE at ' + datetext);
 		statusUpdater.forceRestartServer();
 	};
 };
