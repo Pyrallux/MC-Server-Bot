@@ -7,8 +7,6 @@ const statusUpdater = require('./statusUpdater.js');
 
 // Varaible Declarations
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-let d = new Date();
-let datetext = d.toTimeString().split(' ')[0]
 
 
 // Establish Collection of Commands
@@ -23,16 +21,17 @@ for (const file of commandFiles) {
 
 // Function Updating Bot Status Based on Server
 function updateBotStatus() {
-	datetext = d.toTimeString().split(' ')[0]
+	let d = new Date();
+	let datetext = d.toTimeString().split(' ')[0]
 	serverData = statusUpdater.checkForServer();
 	if (serverData[0] == 'online') {
 		client.user.setStatus('online');
-		client.user.setActivity(serverData[1], { type: ActivityType.WATCHING });
+		client.user.setActivity(serverData[1], { type: ActivityType.Watching });
 		console.log('\nBot Status set to ONLINE at ' + datetext);
 		console.log(serverData[1]);
 	} else {
 		client.user.setStatus('dnd');
-		client.user.setActivity('an Offline Server', { type: ActivityType.WATCHING });
+		client.user.setActivity('an Offline Server', { type: ActivityType.Watching });
 		console.log('\nBot status set to OFFLINE at ' + datetext);
 		statusUpdater.forceRestartServer();
 	};
