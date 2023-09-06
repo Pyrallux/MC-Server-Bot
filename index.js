@@ -28,7 +28,7 @@ function updateBotStatus() {
 		client.user.setStatus('online');
 		client.user.setActivity(serverData[1], { type: ActivityType.Watching });
 		console.log('\nBot Status set to ONLINE at ' + datetext);
-		console.log(serverData[1]);
+		console.log('Watching ' + serverData[1]);
 	} else {
 		client.user.setStatus('dnd');
 		client.user.setActivity('an Offline Server', { type: ActivityType.Watching });
