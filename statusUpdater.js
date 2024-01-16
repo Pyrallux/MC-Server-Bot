@@ -1,3 +1,5 @@
+// NOTE: X's must be replaced with your server's ip address
+
 // Requirements
 const index = require('./index.js');
 const {execSync} = require("child_process");
@@ -6,7 +8,7 @@ const winCMD = require('node-cmd');
 // Varaible Declarations
 let APIserverStatus = 'none';
 let serverPlayers;
-var url = `curl -s http://mcapi.us/server/status?ip=rc2.serveminecraft.net || printf "0.0.0.0"`;
+var url = `curl -s http://mcapi.us/server/status?ip=XXX.XXXXXXXXX.XXXX || printf "0.0.0.0"`;
 var checkminutes = 2.5, checkthe_interval = checkminutes * 60 * 1000;
 let lastServerStatus = true;
 
