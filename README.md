@@ -1,4 +1,4 @@
-* Setup Instructions
+# Setup Instructions
 1. Download repo and install all needed packages.
 2. Fill in the X's within the config.json and statusUpdater.js files with your server/bot's information
 3. Deploy server commands.
